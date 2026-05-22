@@ -1,0 +1,6 @@
+# Apache Spark
+pyspark
+findspark
+
+# Запуск ноутбука / Notebook environment
+jupyter

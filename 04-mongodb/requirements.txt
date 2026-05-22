@@ -1,0 +1,9 @@
+# Подключение к MongoDB / MongoDB driver
+pymongo
+
+# Обработка и визуализация / Analysis and plotting
+pandas
+matplotlib
+
+# Запуск ноутбука / Notebook environment
+jupyter

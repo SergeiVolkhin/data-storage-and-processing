@@ -1,0 +1,6 @@
+# Apache Airflow и провайдер PostgreSQL / Airflow and the PostgreSQL provider
+apache-airflow
+apache-airflow-providers-postgres
+
+# Загрузка CSV в задачах DAG / CSV handling inside DAG tasks
+pandas

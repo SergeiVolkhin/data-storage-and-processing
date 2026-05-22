@@ -1,0 +1,11 @@
+# Основные библиотеки
+pandas
+sqlalchemy
+psycopg2-binary
+python-dotenv
+
+# Линтеры и Типизация
+pylint
+mypy
+pandas-stubs
+sqlalchemy-stubs

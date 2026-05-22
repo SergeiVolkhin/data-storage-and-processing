@@ -1,0 +1,86 @@
+Table transactions {
+  transaction_id int [pk, increment, not null]
+  product_id int [not null, ref: > products.product_id]
+  customer_id int [not null, ref: > customers.customer_id]
+  transaction_date date [not null, note: 'Дата транзакции']
+  online_order boolean [null, note: 'True - онлайн, False - офлайн, NULL - неизвестно']
+  order_status_id int [not null, ref: > order_statuses.id]
+
+}
+
+Table products [note: 'Каталог продуктов и их характеристики'] {
+  product_id int [pk] // Это id из csv, он не авто-инкрементный
+  brand_id int [not null, ref: > brands.id]
+  product_line_id int [not null, ref: > product_lines.id]
+  product_class_id int [not null, ref: > product_classes.id]
+  product_size_id int [not null, ref: > product_sizes.id]
+  list_price decimal(10, 2) [default: 0, note: 'Розничная цена']
+  standard_cost decimal(10, 2) [default: 0, note: 'Себестоимость']
+}
+
+Table order_statuses [note: 'Справочник статусов заказа'] {
+  id int [pk, increment]
+  status_name varchar [unique, not null]
+}
+
+Table brands [note: 'Справочник брендов'] {
+  id int [pk, increment]
+  brand_name varchar [unique, not null]
+}
+
+Table product_lines [note: 'Справочник продуктовых линеек'] {
+  id int [pk, increment]
+  line_name varchar [unique, not null]
+}
+
+Table product_classes [note: 'Справочник классов продукта (high, medium, low)'] {
+  id int [pk, increment]
+  class_name varchar [unique, not null]
+}
+
+Table product_sizes [note: 'Справочник размеров продукта'] {
+  id int [pk, increment]
+  size_name varchar [unique, not null]
+}
+
+Table customers [note: 'Клиенты'] {
+  customer_id int [pk, increment, not null]
+  first_name varchar [not null, note: 'Имя']
+  last_name varchar [null, note: 'Фамилия']
+  gender char(1) [default: 'U', note: 'Пол (M, F, U - Unknown)']
+  DOB date [note: 'Дата рождения']
+  job_title varchar [note: 'Должность']
+  job_industry_category_id int [ref: > job_industries.id]
+  wealth_segment_id int [not null, ref: > wealth_segments.id]
+  deceased_indicator boolean [not null, default: false, note: 'Статус (Жив/Умер)']
+  owns_car boolean [not null, default: false, note: 'Наличие автомобиля']
+  address varchar [note: 'Адресс']
+  postcode varchar [ref: > postcodes.postcode]
+  property_valuation smallint [note: 'Оценка недвижимости']
+}
+
+Table job_industries [note: 'Справочник сфер деятельности'] {
+  id int [pk, increment, not null]
+  category_name varchar [unique, not null]
+}
+
+Table wealth_segments [note: 'Справочник категорий благосостояния'] {
+  id int [pk, increment, not null]
+  segment_name varchar [unique, not null]
+}
+
+Table countries [note: 'Справочник стран'] {
+  id int [pk, increment, not null]
+  country_name varchar [unique, not null]
+}
+
+Table states [note: 'Справочник штатов/регионов'] {
+  id int [pk, increment, not null]
+  state_name varchar [not null]
+  country_id int [not null, ref: > countries.id]
+}
+
+Table postcodes [note: 'Справочник почтовых индексов'] {
+  postcode varchar [pk, not null]
+  state_id int [not null, ref: > states.id]
+}
